@@ -6,16 +6,17 @@ import java.time.Clock;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 public class Pet {
-    private final String id;
+    private final UUID id;
     private String nome;
     private final Especie especie;
     private final LocalDate dataNascimento;
-    private final String tutorId;
+    private final UUID tutorId;
 
-    public Pet(String id, String nome, Especie especie, LocalDate dataNascimento, String tutorId, Clock clock) {
+    public Pet(UUID id, String nome, Especie especie, LocalDate dataNascimento, UUID tutorId, Clock clock) {
         if (especie == null) {
             throw new IllegalArgumentException("Espécie é obrigatória");
         }

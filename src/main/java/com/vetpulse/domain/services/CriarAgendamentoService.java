@@ -20,28 +20,28 @@ public class CriarAgendamentoService implements CriarAgendamentoUseCase {
     private final Clock clock;
 
     @Override
-    public Agendamento criar(String petId, String tutorId, String veterinarioId, LocalDateTime horario) {
+    public Agendamento criar(UUID petId, UUID tutorId, UUID veterinarioId, LocalDateTime horario) {
         validarPetExiste(petId);
         validarVeterinarioExiste(veterinarioId);
         validarDisponibilidade(veterinarioId, horario);
 
-        String novoId = UUID.randomUUID().toString();
+        UUID novoId = UUID.randomUUID();
         Agendamento agendamento = new Agendamento(novoId, petId, tutorId, veterinarioId, horario, clock);
 
         return agendamentoRepository.salvar(agendamento);
     }
 
-    private void validarPetExiste(String petId) {
+    private void validarPetExiste(UUID petId) {
         petRepository.buscarPorId(petId)
                 .orElseThrow(() -> new IllegalArgumentException("pet não encontrado: " + petId));
     }
 
-    private void validarVeterinarioExiste(String veterinarioId) {
+    private void validarVeterinarioExiste(UUID veterinarioId) {
         veterinarioRepository.buscarPorId(veterinarioId)
                 .orElseThrow(() -> new IllegalArgumentException("Veterinário não encontrado: " + veterinarioId));
     }
 
-    private void validarDisponibilidade(String veterinarioId, LocalDateTime horario) {
+    private void validarDisponibilidade(UUID veterinarioId, LocalDateTime horario) {
         agendamentoRepository.buscarPorVeterinarioEHorario(veterinarioId, horario)
                 .ifPresent(agendamentoExistente -> {
                     throw new IllegalStateException(

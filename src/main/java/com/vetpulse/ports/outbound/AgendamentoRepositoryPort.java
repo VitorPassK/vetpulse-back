@@ -4,12 +4,13 @@ import com.vetpulse.domain.models.Agendamento;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface AgendamentoRepositoryPort {
     
-    Optional<Agendamento> buscarPorVeterinarioEHorario(String veterinarioId, LocalDateTime horario);
+    Optional<Agendamento> buscarPorVeterinarioEHorario(UUID veterinarioId, LocalDateTime horario);
 
     Agendamento salvar(Agendamento agendamento);
 
-    Optional<Agendamento> buscarPorId(String id);
+    Optional<Agendamento> buscarPorId(UUID id);
 }

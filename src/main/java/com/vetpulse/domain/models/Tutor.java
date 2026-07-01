@@ -2,11 +2,13 @@ package com.vetpulse.domain.models;
 
 import lombok.Getter;
 
+import java.util.UUID;
+
 @Getter
 public class Tutor extends Usuario{
     private String telefone;
 
-    public Tutor (String id, String nome, String email, String senhaHash, String telefone) {
+    public Tutor (UUID id, String nome, String email, String senhaHash, String telefone) {
         super(id, nome, email, senhaHash);
         this.telefone = telefone;
     }

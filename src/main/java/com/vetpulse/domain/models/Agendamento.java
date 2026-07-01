@@ -3,16 +3,17 @@ package com.vetpulse.domain.models;
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Agendamento {
-    private final String id;
-    private final String petId;
-    private final String tutorId;
-    private final String veterinarioId;
+    private final UUID id;
+    private final UUID petId;
+    private final UUID tutorId;
+    private final UUID veterinarioId;
     private final LocalDateTime horario;
     private StatusAgendamento status;
 
-    public Agendamento(String id, String petId, String tutorId, String veterinarioId, LocalDateTime horario, Clock clock) {
+    public Agendamento(UUID id, UUID petId, UUID tutorId, UUID veterinarioId, LocalDateTime horario, Clock clock) {
         if (horario == null) {
             throw new IllegalArgumentException("Horário é obrigatório");
         }

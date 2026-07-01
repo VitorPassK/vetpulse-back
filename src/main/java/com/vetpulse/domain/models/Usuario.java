@@ -3,18 +3,20 @@ package com.vetpulse.domain.models;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+import java.util.UUID;
+
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public abstract class Usuario {
 
     @EqualsAndHashCode.Include
-    private final String id;
+    private final UUID id;
 
     private String nome;
     private final String email;
     private final String senhaHash;
 
-    protected Usuario(String id, String nome, String email, String senhaHash) {
+    protected Usuario(UUID id, String nome, String email, String senhaHash) {
         this.id = id;
         this.nome = nome;
         this.email = email;
