@@ -11,5 +11,7 @@ public interface VeterinarioRepositoryPort {
 
     Optional<Veterinario> buscarPorCrmv(String crmv);
 
+    Optional<Veterinario> buscarPorEmail(String email);
+
     Veterinario salvar(Veterinario veterinario);
 }

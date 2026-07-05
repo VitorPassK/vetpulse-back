@@ -1,17 +1,24 @@
 package com.vetpulse.domain.models;
 
+import lombok.Getter;
+
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
+@Getter
 public class Agendamento {
-    private final UUID id;
-    private final UUID petId;
-    private final UUID tutorId;
-    private final UUID veterinarioId;
-    private final LocalDateTime horario;
+    private UUID id;
+    private UUID petId;
+    private UUID tutorId;
+    private UUID veterinarioId;
+    private LocalDateTime horario;
     private StatusAgendamento status;
+
+    private Agendamento() {
+
+    }
 
     public Agendamento(UUID id, UUID petId, UUID tutorId, UUID veterinarioId, LocalDateTime horario, Clock clock) {
         if (horario == null) {
@@ -59,6 +66,19 @@ public class Agendamento {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public static Agendamento reconstituir(UUID id, UUID petId, UUID tutorId,
+                                           UUID veterinarioId, LocalDateTime horario,
+                                           StatusAgendamento status) {
+        Agendamento agendamento = new Agendamento();
+        agendamento.id = id;
+        agendamento.petId = petId;
+        agendamento.tutorId = tutorId;
+        agendamento.veterinarioId = veterinarioId;
+        agendamento.horario = horario;
+        agendamento.status = status;
+        return agendamento;
     }
 
 }
