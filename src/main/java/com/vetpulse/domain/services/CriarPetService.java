@@ -1,5 +1,6 @@
 package com.vetpulse.domain.services;
 
+import com.vetpulse.domain.exceptions.RecursoNaoEncontradoException;
 import com.vetpulse.domain.models.Especie;
 import com.vetpulse.domain.models.Pet;
 import com.vetpulse.ports.inbound.CriarPetUseCase;
@@ -30,6 +31,6 @@ public class CriarPetService implements CriarPetUseCase {
 
     private void validarTutorExiste(UUID tutorId) {
         tutorRepository.buscarPorId(tutorId)
-                .orElseThrow(() -> new IllegalArgumentException("Tutor não encontrado: " + tutorId));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Tutor", tutorId));
     }
 }

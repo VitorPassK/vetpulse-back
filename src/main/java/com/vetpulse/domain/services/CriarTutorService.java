@@ -1,5 +1,6 @@
 package com.vetpulse.domain.services;
 
+import com.vetpulse.domain.exceptions.RecursoJaExistenteException;
 import com.vetpulse.domain.models.Tutor;
 import com.vetpulse.ports.inbound.CriarTutorUseCase;
 import com.vetpulse.ports.outbound.PasswordHasherPort;
@@ -28,7 +29,7 @@ public class CriarTutorService implements CriarTutorUseCase {
     private void validarEmailDisponivel(String email) {
         tutorRepository.buscarPorEmail(email)
                 .ifPresent(tutorExistente -> {
-                    throw new IllegalArgumentException("Este email já está cadastrado em nosso sistema");
+                    throw new RecursoJaExistenteException("Tutor", "email", email);
                 });
     }
 

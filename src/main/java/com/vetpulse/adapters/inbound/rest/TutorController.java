@@ -5,6 +5,8 @@ import com.vetpulse.adapters.inbound.dto.tutor.TutorResponse;
 import com.vetpulse.ports.inbound.CriarTutorUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,10 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class TutorController {
 
+    private static final Logger log = LoggerFactory.getLogger(AgendamentoController.class);
+
     private final CriarTutorUseCase criarTutorUseCase;
 
     @PostMapping
     public ResponseEntity<TutorResponse> criar(@Valid @RequestBody CriarTutorRequest request) {
+        log.debug("Requisição recebida: POST /api/v1/tutores, payload: {}", request);
         var tutor = criarTutorUseCase.criar(
                 request.nome(),
                 request.email(),

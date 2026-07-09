@@ -1,5 +1,6 @@
 package com.vetpulse.domain.services;
 
+import com.vetpulse.domain.exceptions.RecursoNaoEncontradoException;
 import com.vetpulse.domain.models.Agendamento;
 import com.vetpulse.ports.inbound.RealizarAgendamentoUseCase;
 import com.vetpulse.ports.outbound.AgendamentoRepositoryPort;
@@ -15,7 +16,7 @@ public class RealizarAgendamentoService implements RealizarAgendamentoUseCase {
     @Override
     public Agendamento realizar(UUID agendamentoId) {
         Agendamento agendamento = agendamentoRepository.buscarPorId(agendamentoId)
-                .orElseThrow(() -> new IllegalArgumentException("Agendamento não encontrado: " + agendamentoId));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Agendamento", agendamentoId));
 
         agendamento.realizar();
 

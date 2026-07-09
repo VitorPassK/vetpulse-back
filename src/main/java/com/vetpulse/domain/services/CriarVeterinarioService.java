@@ -1,5 +1,6 @@
 package com.vetpulse.domain.services;
 
+import com.vetpulse.domain.exceptions.RecursoJaExistenteException;
 import com.vetpulse.domain.models.Veterinario;
 import com.vetpulse.ports.inbound.CriarVeterinarioUseCase;
 import com.vetpulse.ports.outbound.PasswordHasherPort;
@@ -30,14 +31,14 @@ public class CriarVeterinarioService implements CriarVeterinarioUseCase {
     private void validarCrmvDisponivel(String crmv) {
         veterinarioRepository.buscarPorCrmv(crmv)
                 .ifPresent(v -> {
-                    throw new IllegalArgumentException("Já existe um veterinário cadastrado com esse crmv.");
+                    throw new RecursoJaExistenteException("Veterinario", "crmv",  crmv);
                 });
     }
 
     private void validarEmailDisponivel(String email) {
         veterinarioRepository.buscarPorEmail(email)
                 .ifPresent(v -> {
-                    throw new IllegalArgumentException("Já existe um veteriário cadastrado com esse email.");
+                    throw new RecursoJaExistenteException("Veterinário", "email",  email);
                 });
     }
 }

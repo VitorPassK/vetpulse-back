@@ -8,9 +8,11 @@ import com.vetpulse.adapters.outbound.security.PasswordHasherAdapter;
 import com.vetpulse.domain.services.*;
 import com.vetpulse.ports.inbound.*;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.time.Clock;
 
+@Configuration
 public class BeansConfig {
 
     @Bean
